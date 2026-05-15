@@ -21,5 +21,16 @@ def sigmaoid_derivative(z):
 inputs  = [[0,0], [0,1], [1,0], [1,1]]
 targets = [0, 0, 0, 1]
 
-lr = 0.1
+lr = 0.1 #learning rate
 
+for epoch in range(1000):
+    total_error=0
+    inputs
+    for i in range(len(inputs)):
+        x=inputs[i]
+        t=targets[i]
+        z=(x[0]*weight1)+(x[1]*weight2)+bias
+        output=sigmaoid(z)
+
+        error=t-output
+        total_error = total_error + error ** 2 #square root to remove negative
