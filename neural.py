@@ -23,9 +23,8 @@ targets = [0, 0, 0, 1]
 
 lr = 0.1 #learning rate
 
-for epoch in range(1000):
+for epoch in range(100000):
     total_error=0
-    inputs
     for i in range(len(inputs)):
         x=inputs[i]
         t=targets[i]
@@ -33,4 +32,19 @@ for epoch in range(1000):
         output=sigmaoid(z)
 
         error=t-output
-        total_error = total_error + error ** 2 #square root to remove negative
+        total_error = total_error + error ** 2 #squared to remove negative
+
+        delta = error * sigmaoid_derivative(z)
+
+        weight1+=x[0]*lr*delta
+        weight2+=x[1]*lr*delta
+        bias+=lr*delta
+    if epoch % 100 == 0:
+        print(f"epoch {epoch} error {round(total_error, 6)}")
+
+print("\nresults:")
+for i in range(len(inputs)):
+    x = inputs[i]
+    z = (x[0] * weight1) + (x[1] * weight2) + bias
+    output = sigmaoid(z)
+    print(f"input {x} target {targets[i]} output {round(output, 3)} answer {round(output)}")    
